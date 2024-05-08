@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+}
+
+body{
+    background-color: #ececec;
+}
+/* Navbar Start */
+.container{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.container-nav{
+    max-width: 977px;
+    margin: 0 auto;
+}
+
+nav {
+    background-color: burlywood;
+    padding: 1rem;
+    text-align: center;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    border-radius: 0px 0px 8px 8px;
+}
+.nav-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .menu{
+        display: flex;
+        list-style: none;
+        align-items: center;
+        
+
+        & li{
+            margin-left: 1rem;
+            top : 2px;
+
+            & a {
+                font-size: 25px;
+                text-decoration: none;
+                color: #333;
+                font-family: Arial, Helvetica, sans-serif;
+                top: 5px;
+            }
+        }
+    }
+}
+.cart {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background-color: burlywood;
+    display: flex; /* เพิ่ม display: flex เพื่อให้ Flexbox ทำงาน */
+    align-items: center; /* กำหนดให้แกนกึ่งกลางตามแนวตั้ง */
+    padding: 5px; /* ปรับขนาดของพื้นที่แต่ละด้านของปุ่ม Cart */
+}
+
+.cart-detail {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+.fa-shopping-cart {
+    margin-right: 5px;
+    color: #333;
+    font-size: 60px;
+}
+
+.cart-count {
+    
+    
+    color: red;
+    font-size: 29px;
+}
+
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: none;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.cart-container img {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+}
+
+.cart-detail:hover {
+    text-decoration: underline;
+}
+
+/* Navbar End */
+/* Body */
+main {
+    padding: 2rem;
+}
+
+/* Card */
+.product-card {
+    display: flex;
+    background-color: rgb(214, 164, 99);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    /* margin-bottom: 20px;    */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-image {
+    flex: 1;
+    max-width: 150px;
+}
+
+.product-image img {
+    margin-left: 4px;
+    margin-top: 4px;
+    width: 100%; /* ทำให้กว้างเต็ม container */
+    height: auto; /* รักษาสัดส่วนของรูปภาพ */
+    
+}
+
+.product-info {
+    flex: 2;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.product-info h2 {
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.product-info p {
+    color: #000000bb;
+    line-height: 1.6;
+}
+
+/* Card Button */
+.add-to-cart {
+    flex: 1;
+    border-radius: 8px;
+    background-color: rgb(244, 210, 215);
+    border: none;
+    margin-right: 5px;
+    margin-top: 1px; 
+    height: 150px;
+    font-size: 18px;
+    
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) {
+    
+    .menu li {
+        margin-left: 10px; /* เพิ่มระยะห่างระหว่างเมนู */
+      }
+
+    .product-card {
+        margin: 10px 0; /* เพิ่มระยะห่างระหว่างสินค้า */
+      }  
+      
+    .fa-shopping-cart {
+        font-size: 45px; /* เพิ่มขนาดไอคอนตะกร้า */
+      }
+  }
+
+@media only screen and (max-width: 375px) {
+    /* Navbar */
+    nav {
+      padding: 0.5rem; /* ลด padding ให้น้อยลง */
+    }
+  
+    .menu li {
+      margin-left: 0.5rem; /* ลดระยะห่างระหว่างเมนู */
+    }
+  
+    .fa-shopping-cart {
+      font-size: 40px; /* ลดขนาดไอคอนตะกร้า */
+    }
+  
+    .cart-count {
+      font-size: 20px; /* ลดขนาดตัวเลขจำนวนสินค้าในตะกร้า */
+    }
+  
+    /* Card */
+    .product-card {
+      flex-direction: column; /* แสดงสินค้าแบบตั้งฉาก */
+    }
+  
+    .product-info {
+      padding: 10px; /* ลด padding ของข้อมูลสินค้า */
+      margin-top: 10px; /* ลดระยะห่างด้านบนของข้อมูลสินค้า */
+    }
+  
+    .product-info h2 {
+      font-size: 18px; /* ลดขนาดตัวอักษรของชื่อสินค้า */
+    }
+  
+    .add-to-cart {
+      height: auto; /* ปรับความสูงของปุ่มให้พอดีกับข้อความ */
+      font-size: 16px; /* ลดขนาดตัวอักษรของปุ่ม */
+      margin: 5px 0; /* ปรับระยะห่างของปุ่ม */
+    }
+  }
+  
+  
+  

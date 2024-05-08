@@ -1,0 +1,98 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .previous, .check-out {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .previous:hover, .check-out:hover {
+    opacity: 0.8;
+  }
+  
+  @media only screen and (max-width: 375px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 6px;
+    }
+    
+    .previous, .check-out {
+        font-size: 14px;
+    }
+  }
+  
+
+/* Responsive styles for iPhone X */
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) 
+  and (orientation: portrait) {
+    .container {
+        padding: 10px;
+    }
+
+    table th, table td {
+        padding: 6px;
+    }
+
+    button {
+        padding: 8px 16px;
+        margin-bottom: 10px;
+    }
+}
+

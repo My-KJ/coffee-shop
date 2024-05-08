@@ -1,0 +1,59 @@
+body {
+    background-color: Burlywood;
+}
+/* เฉพาะหัวข้อ h1 */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* เฉพาะหัวข้อ h2 */
+h2 {
+    margin-top: 30px;
+}
+
+/* รายการสินค้า */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* รายการสินค้าที่แต่ละรายการ */
+ul li {
+    margin-bottom: 20px;
+}
+
+/* ปุ่มยกเลิกการสั่งซื้อ */
+.btn-outline-danger {
+    margin-top: 20px;
+}
+
+/* ปุ่ม Home */
+.btn {
+    margin-top: 20px;
+}
+
+/* Container */
+.container {
+    margin-top: 50px;
+    text-align: center;
+    padding: 2rem;
+}
+/* Styles specific to iPhone X */
+@media only screen 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
+    and (-webkit-device-pixel-ratio: 3) {
+    
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

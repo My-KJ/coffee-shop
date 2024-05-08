@@ -1,0 +1,109 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Invoice container styles */
+.invoice-container {
+    top: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.header p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Customer information styles */
+.customer-info {
+    margin-bottom: 20px;
+}
+
+.customer-info h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.customer-info p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Order details styles */
+.order-details {
+    margin-bottom: 20px;
+}
+
+.order-details h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    /* padding: ; */
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.total-row td {
+    text-align: right;
+}
+        
+/* Responsive styles */
+@media (max-width: 600px) {
+    .invoice-container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header p,
+    .customer-info p,
+    .order-details h2 {
+        font-size: 14px;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+    }
+}

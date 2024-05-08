@@ -1,0 +1,77 @@
+/* CSS for iPhone X */
+
+/* เพิ่มส่วนของคอนเทนเนอร์ให้อยู่กึ่งกลางของหน้าจอ */
+.container {
+    max-width: 100%;
+    padding: 20px;
+}
+
+/* ปรับขนาดและรูปแบบของปุ่มยืนยันการสั่งซื้อ */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ปรับขนาดและรูปแบบของรายการสินค้า */
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+/* ปรับขนาดของฟิลด์อินพุต */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* ปรับขนาดและการจัดวางของปุ่ม Place Order */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ปรับขนาดและการจัดวางของข้อความ Total Price */
+p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* ปรับขนาดและการจัดวางของหัวข้อ Order Summary */
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* ปรับขนาดและการจัดวางของส่วนของหน้า Checkout */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* ปรับขนาดและการจัดวางของหัวเรื่อง Checkout */
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
