@@ -63,6 +63,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                 <tbody>
                     <?php
                    $totalPrice = 0;
+                   $total = 0;
 
                    foreach($_SESSION['cart'] as $item) {
                        $productId = $item['id'];

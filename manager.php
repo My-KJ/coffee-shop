@@ -31,7 +31,7 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'Manager' || $_SESSIO
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/manager.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -46,10 +46,10 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'Manager' || $_SESSIO
 </head>
 <body>
    <!-- Navbar Start -->
-   <nav class="navbar navbar-expand-lg">
+   <nav class="navbar sticky-top">
       <div class="container">
           <div class="nav-con">
-          <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="manager.php">
         <?php
             $sql = "SELECT * FROM data_common";
             $result = $conn->query($sql);
@@ -64,20 +64,20 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'Manager' || $_SESSIO
             }
         ?>
         </a>
-        <div style="width: 800px;"></div>
+        </div>
             <ul class="menu">
                 <li style="position: relative;">
                     <a href="order-details.php">
                         <i id="notificationIcon" class="fa fa-bell" style="font-size: 20px; color: #333;"></i>
                     </a>
                 </li> 
-                <li><a href="type_2.php"><i>information</i></a></li>    
+                <li><a href="type_2.php"><i>information</i></a></li> 
+                <li><a href="bill.php"><i>bill</i></a></li>   
                 <li><a href="user-crud.php"><i>Manager</i></a></li>
                 <li><a href="crud.php"><i>Product</i></a></li>
                 <li><a href="about.php"><i>About</i></a></li>
                 <li><a href="logout.php"><i>log-out</i></a></li>
             </ul>
-          </div>
       </div>
    </nav>
    <!-- Navbar End -->

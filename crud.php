@@ -97,9 +97,9 @@
                         if ($row['status'] === 'Ready') {
                             echo 'green'; // ถ้าสถานะเป็น "Ready" ให้ใช้สีเขียว
                         } elseif ($row['status'] === 'Out of raw materials') {
-                            echo 'red'; // ถ้าสถานะเป็น "Sold out" ให้ใช้สีแดง
+                            echo 'orange'; // ถ้าสถานะเป็น "Sold out" ให้ใช้สีแดง
                         } elseif ($row['status'] === 'Quit selling') {
-                            echo 'orange'; // ถ้าสถานะเป็น "Quit selling" ให้ใช้สีเทา
+                            echo 'red'; // ถ้าสถานะเป็น "Quit selling" ให้ใช้สีเทา
                         } else {
                             echo 'black'; // สีดำสำหรับสถานะที่ไม่ระบุ
                         }
