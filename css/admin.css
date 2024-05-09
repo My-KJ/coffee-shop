@@ -12,6 +12,7 @@ body{
 .container {
   max-width: 960px;
   margin: 0 auto;
+  justify-content: space-between;
 }
 
 .navbar {
@@ -23,7 +24,8 @@ body{
 }
 
 .nav-con {
-  display: flex;
+  display: flex; 
+  justify-content: space-between; 
   align-items: center;
 }
 

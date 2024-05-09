@@ -98,7 +98,12 @@
                                     <td><?php echo $row["price"]; ?> Bath</td>
                                     <td><?php echo $row["total_price"]; ?> Bath</td>
                                     <td><?php echo $row['status']; ?></td>
-                                    <td><a href="edit-bill.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Edit</a></td>
+                                    <td>
+                                      <div class="btn-group">
+                                      <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Edit</a>
+                                      <a href="success.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Success</a>
+                                      </div>
+                                  </td>
                                 </tr>
                     <?php
                             }

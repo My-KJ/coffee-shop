@@ -46,40 +46,39 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'admin' || $_SESSION[
 
 </head>
 <body>
-   <!-- Navbar Start -->
-   <nav class="navbar navbar-expand-lg">
-      <div class="container">
-          <div class="nav-con">
-          <a class="navbar-brand" href="admin.php">
-        <?php
-            $sql = "SELECT * FROM data_common";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $image_url = $row["pic1"];
-            ?>
-            <img src="<?= $image_url ?>" alt="Product Image" style="width: 40px; height: auto; border-radius: 10px;">
-        <?php
-            } else {
-                echo "No image found.";
-            }
-        ?>
-        </a>
-        <div style="width: 800px;"></div>
+    <!-- Nav start -->
+<nav class="navbar sticky-top">
+    <div class="container">
+        <div class="nav-con">
+                <a class="navbar-brand" href="admin.php">
+                    <?php
+                    $sql = "SELECT * FROM data_common";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $image_url = $row["pic1"];
+                        ?>
+                        <img src="<?= $image_url ?>" alt="Product Image" style="width: 40px; height: auto; border-radius: 10px;">
+                    <?php
+                    } else {
+                        echo "No image found.";
+                    }
+                    ?>
+                </a>
+            </div>
             <ul class="menu">
                 <li style="position: relative;">
                     <a href="order-details.php">
                         <i id="notificationIcon" class="fa fa-bell" style="font-size: 20px; color: #333;"></i>
                     </a>
-                </li> 
-                <li><a href="type_2.php"><i>information</i></a></li>    
+                </li>
+                <li><a href="type_2.php"><i>information</i></a></li>
                 <li><a href="crud.php"><i>Product</i></a></li>
                 <li><a href="about.php"><i>About</i></a></li>
                 <li><a href="logout.php"><i>log-out</i></a></li>
             </ul>
-          </div>
-      </div>
-   </nav>
+        </div>
+</nav>
    <!-- Navbar End -->
 
     <div class="flex-container" style="align-items: center;" >

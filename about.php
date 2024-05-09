@@ -101,6 +101,7 @@ $id_emp = $_SESSION['username'];
 
     <!-- Card End -->
         </div>
+        <a class="home" href="clear-db.php" role="button">Clear DB</a>
     </main>
 
 
