@@ -201,60 +201,68 @@ if ($result->num_rows > 0) {
       // แสดงแบบเดิม (มี selector และคอมเม้น)
       ?>
                   <div class="col-lg-3 col-md-6 mb-4">
-                    <form action="cart-add.php?id_bill=<?php echo $_SESSION['id_bill']; ?>" method="post">
-                        <div class="card">
-                            <input type="hidden" name="id" value="<?php echo $row['id_product']; ?>">
-                            <img src="<?= $row["image"] ?>" class="card-img-top<?= ($row['status'] === 'Quit selling') ? ' grayscale' : '' ?>" alt="Product Image"  style="height: 250px;">
+                <form action="cart-add.php?id_bill=<?php echo $_SESSION['id_bill']; ?>" method="post">
+                    <div class="card">
+                        <input type="hidden" name="id" value="<?php echo $row['id_product']; ?>">
+                        <img src="<?= $row["image"] ?>" class="card-img-top<?= ($row['status'] === 'Quit selling') ? ' grayscale' : '' ?>" alt="Product Image" style="height: 270px;">
                         <div class="card-body">
                             <h6 style="font-size: 15px;" class="card-title"><?= $row["name"] ?></h6>
-                            <?php if ($row['status'] === 'Out of raw materials'): ?>
-                                <p style="color: orange;">Out of raw materials</p>
-                            <?php elseif ($row['status'] === 'Quit selling'): ?>
-                                <p style="color: red;">Products temporarily stopped for sale</p>
-                            <?php else: ?>
-                                <select class="custom-select mb-3" required>
-                                    <?php if ($row["price_h"] != 0): ?>
+                            <select class="custom-select mb-3" name="price" required>
+                                <?php if ($row["price_h"] != 0): ?>
                                     <option data-type="price_h" value="<?= $row["price_h"] ?>">Hot : <?= $row["price_h"] ?> Bath</option>
-                                    <?php endif; ?>
-                                    <?php if ($row["price_c"] != 0): ?>
+                                <?php endif; ?>
+                                <?php if ($row["price_c"] != 0): ?>
                                     <option data-type="price_c" value="<?= $row["price_c"] ?>">Cold : <?= $row["price_c"] ?> Bath</option>
-                                    <?php endif; ?>
-                                    <?php if ($row["price_f"] != 0): ?>
+                                <?php endif; ?>
+                                <?php if ($row["price_f"] != 0): ?>
                                     <option data-type="price_f" value="<?= $row["price_f"] ?>">Fleppe : <?= $row["price_f"] ?> Bath</option>
-                                    <?php endif; ?>
-                                </select>
-                                <?php if ($row['status'] !== 'Quit selling'): ?>
-                                    <label for="Comment">Option</label>
-                                    <select class="custom-select mb-3" name="comment">
-                                        <option value="">Normal sweet 50%</option>
-                                        <optgroup label="Sweet">
-                                            <option value="No Sweet">No Sweet</option>
-                                            <option value="Low sweet 25%">Low sweet 25%</option>
-                                            <option value="add sweet 25%">add sweet 25%</option>
-                                            <option value="add sweet 50%">add sweet 50%</option>
-                                        <?php if ($row['type_2'] == 'Coffee'): ?>
-                                            <optgroup label="Shot">
-                                                <option value="Single Shot +20 Bath">Single Shot +20 Bath</option>
-                                                <option value="Double Shot +40 Bath">Double Shot +40 Bath</option>
-                                                <option value="Triple Shot +60 Bath">Triple Shot +60 Bath</option>
-                                            </optgroup>
-                                        <?php endif; ?>
-                                        <?php if ($row['type_2'] == 'Tea'): ?>
-                                            <optgroup label="Topping">
-                                                <option value="Bubble +5 Bath">Bubble +5 Bath</option>
-                                                <option value="Milk Pudding +10 Bath">Milk Pudding +10 Bath</option>
-                                                <option value="Wip Cheese +20 Bath">Wip Cheese +20 Bath</option>
-                                            </optgroup>
-                                        <?php endif; ?>
-                                    </select>
-                            <?php endif; ?>
-                                        <br>
-                                        <button class="btn btn-primary mt-3" type="submit">Add to Cart</button>
-                                        <?php endif; ?>
+                                <?php endif; ?>
+                            </select>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Quantity</span>
+                                </div>
+                                <input type="number" class="form-control" name="quantity" value="1" min="1" max="99">
                             </div>
+                            <label for="Comment">Option</label>
+                            <select class="custom-select mb-3" name="comment">
+                                <option value=""></option>
+                                <optgroup label="Sweet">
+                                    <option value="No Sweet">No Sweet</option>
+                                    <option value="add sweet 25%">add sweet 25%</option>
+                                    <option value="add sweet 50%">add sweet 50%</option>
+                                    <option value="add sweet 75%">add sweet 75%</option>
+                                    <option value="add sweet 100%">add sweet 100%</option>
+                                    <option value="Low sweet 25%">Low sweet 25%</option>
+                                <?php if ($row['type_2'] == 'Coffee'): ?>
+                                    <optgroup label="Shot">
+                                        <option value="Single Shot +20 Bath">Single Shot +20 Bath</option>
+                                        <option value="Double Shot +40 Bath">Double Shot +40 Bath</option>
+                                        <option value="Triple Shot +60 Bath">Triple Shot +60 Bath</option>
+                                    </optgroup>
+                                <?php endif; ?>
+                                <?php if ($row['type_2'] == 'Tea'): ?>
+                                    <optgroup label="Topping">
+                                        <option value="Bubble +5 Bath">Bubble +5 Bath</option>
+                                        <option value="Milk Pudding +10 Bath">Milk Pudding +10 Bath</option>
+                                        <option value="Wip Cheese +20 Bath">Wip Cheese +20 Bath</option>
+                                    </optgroup>
+                                <?php endif; ?>
+                            </select>
+                            <br>
+                            <?php if ($row['status'] === 'Quit selling' || $row['status'] === 'Out of raw materials'): ?>
+                                <?php if ($row['status'] === 'Quit selling'): ?>
+                                    <button class="btn btn-danger mt-3" type="button" disabled>Add to Cart</button>
+                                <?php elseif ($row['status'] === 'Out of raw materials'): ?>
+                                    <button class="btn btn-warning mt-3" type="button" disabled>Add to Cart</button>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <button class="btn btn-primary mt-3" type="submit">Add to Cart</button>
+                            <?php endif; ?>
                         </div>
-                    </form>
-                  </div>
+                    </div>
+                </form>
+            </div>
       <?php
     }
   }

@@ -95,7 +95,7 @@ $detail_result = mysqli_query($conn, $query);
         <div class="customer-info">
             <h2>Bill Information</h2>
             <p>Name Employee: <?php echo $employeeId ?></p>
-            <p>Tel : 0980939604</p>
+            <p>Tel : 0980939604 (เบอร์ร้าน)</p>
             <!-- Add other customer information here if needed -->
         </div>
         <div class="order-details">
@@ -118,12 +118,9 @@ $detail_result = mysqli_query($conn, $query);
                         $quantity = $row['qty'];
                         $comment = $row['comment'];
                     
-                        // คำนวณราคาสินค้าต่อหน่วย
-                        $unit_price = $product_price;
-                    
-                        // คำนวณราคารวมของสินค้ารวมค่าคอมเม้น
-                        $total_price += ($product_price * $quantity);
-                    
+                       
+                        $total = $product_price * $quantity;
+
                         // เพิ่มราคา Shot เข้าไปในราคาของสินค้า
                         $shotPrice = 20;
                         if ($comment == 'Single Shot +20 Bath') {
@@ -143,18 +140,19 @@ $detail_result = mysqli_query($conn, $query);
                         } elseif ($comment == 'Whip Cheese +20 Bath') {
                             $toppingPrice += 20;
                         }
+                        $total += $toppingPrice;
                     ?>
                         <tr>
                             <td><?php echo $row['product_name']; ?> : <?php echo $row['comment']; ?></td>
                             <td><?php echo $quantity; ?></td>
-                            <td style="text-align: right;"><?php echo $unit_price; ?> Bath</td>
+                            <td style="text-align: right;"><?php echo $product_price; ?> Bath</td>
                             <td style="text-align: right;"><?php echo $product_price * $quantity; ?> Bath</td>
                         </tr>
                     <?php endwhile; ?>
                     
                     <tr class="total-row">
                         <td colspan="3">Total</td>
-                        <td><?php echo $total_price; ?> Bath</td>
+                        <td><?php echo $total; ?> Bath</td>
                     </tr>
                 </tbody>
             </table>

@@ -73,6 +73,7 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'admin' || $_SESSION[
                     </a>
                 </li>
                 <li><a href="type_2.php"><i>information</i></a></li>
+                <li><a href="bill.php"><i>bill</i></a></li>
                 <li><a href="crud.php"><i>Product</i></a></li>
                 <li><a href="about.php"><i>About</i></a></li>
                 <li><a href="logout.php"><i>log-out</i></a></li>

@@ -54,10 +54,10 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>                     
-                        <th>Action</th>
+                        <th style="text-align: center;">Name</th>
+                        <th style="text-align: center;">Price</th>
+                        <th style="text-align: center;">Quantity</th>                     
+                        <th style="text-align: center;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,10 +115,14 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                     } 
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align: right;">Total Price:</td>
+                        <td><b><?= $totalPrice ?> Bath</b></td>
+                    </tr>
+                </tfoot>
             </table>
 
-            <!-- แสดงราคารวมของสินค้าทั้งหมด -->
-            <p>Total Price: <?= $totalPrice ?> Bath</p>
             
             <form action="checkout.php?id_bill=<?php echo $_SESSION['id_bill'];?>" method="post">
             <button type="submit" class="check-out">Check Bill.</button>

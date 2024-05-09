@@ -80,7 +80,7 @@
                 <th>Price</th>
                 <th>Total Price</th>
                 <th>Status</th>
-                <th>Action</th>
+                <!-- <th>Action</th> -->
                 
             </tr>
         </thead>
@@ -89,7 +89,7 @@
                 if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) { 
-                  if ($row['status'] === 'Processing') {
+                  if ($row['status'] === 'Re-bill') {
                     ?>
                                 <tr>
                                     <td><?php echo $row["id_bill"]; ?></td>
@@ -98,12 +98,12 @@
                                     <td><?php echo $row["price"]; ?> Bath</td>
                                     <td><?php echo $row["total_price"]; ?> Bath</td>
                                     <td><?php echo $row['status']; ?></td>
-                                    <td>
+                                    <!-- <td>
                                       <div class="btn-group">
                                       <a href="re-bill.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Re-Bill</a>
                                       <a href="success.php?id=<?php echo $row['id']; ?>" class="btn btn-success">Success</a>
                                       </div>
-                                  </td>
+                                    </td> -->
                                 </tr>
                     <?php
                             }
