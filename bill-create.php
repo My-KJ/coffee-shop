@@ -111,13 +111,12 @@ $detail_result = mysqli_query($conn, $query);
                 </thead>
                 <tbody>
                     <?php 
-                    
+                    $total = 0;
                     $total_price = 0;
                     while ($row = mysqli_fetch_assoc($detail_result)):
                         $product_price = $row['price'];
                         $quantity = $row['qty'];
                         $comment = $row['comment'];
-                    
                        
                         $total = $product_price * $quantity;
 
@@ -152,7 +151,7 @@ $detail_result = mysqli_query($conn, $query);
                     
                     <tr class="total-row">
                         <td colspan="3">Total</td>
-                        <td><?php echo $total; ?> Bath</td>
+                        <td><?php echo $total_price; ?> Bath</td>
                     </tr>
                 </tbody>
             </table>
