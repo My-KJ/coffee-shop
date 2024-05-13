@@ -25,11 +25,13 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'admin' || $_SESSION[
 }
 
 // Check if id_bill is set via GET and set it in session if available
+// Check if id_bill is set via GET and set it in session if available
 if(isset($_GET['id_bill'])) {
     $_SESSION['id_bill'] = $_GET['id_bill'];
 } else {
-    $id_bill = "default_value";
-}
+    $_SESSION['id_bill'] = "default_value";
+} 
+ $id_bill = $_SESSION['id_bill'];
 
 // ตรวจสอบว่ามีการส่งค่าไอดีบิลผ่าน URL หรือไม่
 if (!isset($_GET['id_bill']) || empty($_GET['id_bill'])) {
@@ -50,8 +52,8 @@ $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) == 0) {
     // หากไม่มีให้แสดงข้อความและ redirect ไปยังหน้าที่แสดงรายการบิล
     echo "<script>
-    alert('Bill not found!');
-    window.location.href='admin_page.php';
+    alert('Bill not found! " . mysqli_error($conn) . "');
+    window.location.href='admin.php';
     </script>";
     exit(); // จบการทำงานของสคริปต์ที่นี่
 }
@@ -103,55 +105,49 @@ $detail_result = mysqli_query($conn, $query);
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Total Price</th>
+                        <th style="text-align: center;">Product</th>
+                        <th style="text-align: center;">Quantity</th>
+                        <th style="text-align: right;">Unit Price</th>
+                        <th style="text-align: right;">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                    $total = 0;
-                    $total_price = 0;
+                    $total_price = 0; // Initialize total price
+
                     while ($row = mysqli_fetch_assoc($detail_result)):
                         $product_price = $row['price'];
                         $quantity = $row['qty'];
                         $comment = $row['comment'];
                        
-                        $total = $product_price * $quantity;
-
-                        // เพิ่มราคา Shot เข้าไปในราคาของสินค้า
-                        $shotPrice = 20;
-                        if ($comment == 'Single Shot +20 Bath') {
-                            $total_price += $shotPrice * $quantity;
-                        } elseif ($comment == 'Double Shot +40 Bath') {
-                            $total_price += ($shotPrice * 2 * $quantity);
-                        } elseif ($comment == 'Triple Shot +60 Bath') {
-                            $total_price += ($shotPrice * 3 * $quantity);
-                        }
+                        $total = $product_price * $quantity; // Initialize total price with product price
                     
-                        // เพิ่มราคา Topping เข้าไปในราคาของสินค้า
-                        $toppingPrice = 0;
-                        if ($comment == 'Bubble +5 Bath') {
-                            $toppingPrice += 5;
-                        } elseif ($comment == 'Milk Pudding +10 Bath') {
-                            $toppingPrice += 10;
-                        } elseif ($comment == 'Whip Cheese +20 Bath') {
-                            $toppingPrice += 20;
+                        $shotPrice = 20; // Price of a shot
+                        $toppingPrice = 0; // Initialize topping price
+                    
+                        // Calculate additional price for shot and topping based on the comment
+                        if ($comment == 'Single Shot +20 Bath') {
+                            $total += $shotPrice * $quantity;
+                        } elseif ($comment == 'Double Shot +40 Bath') {
+                            $total += ($shotPrice * 2 * $quantity);
+                        } elseif ($comment == 'Triple Shot +60 Bath') {
+                            $total += ($shotPrice * 3 * $quantity);
                         }
-                        $total += $toppingPrice;
+
+                        // Calculate total price for all items
+                        $total_price += $total;
                     ?>
                         <tr>
-                            <td><?php echo $row['product_name']; ?> : <?php echo $row['comment']; ?></td>
-                            <td><?php echo $quantity; ?></td>
-                            <td style="text-align: right;"><?php echo $product_price; ?> Bath</td>
-                            <td style="text-align: right;"><?php echo $product_price * $quantity; ?> Bath</td>
+                            <td style="text-align: center;"><?php echo $row['product_name']; ?> : <?php echo $row['comment']; ?></td>
+                            <td style="text-align: center;"><?php echo $quantity; ?></td>
+                            <td style="text-align: right;"><?php echo number_format($total / $quantity); ?> Bath</td>
+                            <td style="text-align: right;"><?php echo number_format($total); ?> Bath</td>
                         </tr>
                     <?php endwhile; ?>
                     
                     <tr class="total-row">
                         <td colspan="3">Total</td>
-                        <td><?php echo $total_price; ?> Bath</td>
+                        <td><?php echo number_format($total_price); ?> Bath</td>
                     </tr>
                 </tbody>
             </table>

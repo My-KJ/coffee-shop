@@ -140,16 +140,17 @@ if (isset($_GET['type_1'])) {
 
   // ตรวจสอบว่าค่าที่ส่งมาเป็น "Beverage", "Dished", หรือ "Baked" หรือไม่
   if ($type_1 === 'Beverage') {
+    
     // ดึงข้อมูลสินค้าประเภท Beverage
-    $sql = "SELECT * FROM products WHERE type_1 = '$type_1'";
+    $sql = "SELECT * FROM products WHERE type_1 = '$type_1' && status != 'Quit selling'";
     $result = mysqli_query($conn, $sql);
   } else if ($type_1 === 'Dished') {
     // ดึงข้อมูลสินค้าประเภท Dished
-    $sql = "SELECT * FROM products WHERE type_1 = '$type_1'";
+    $sql = "SELECT * FROM products WHERE type_1 = '$type_1' && status != 'Quit selling'";
     $result = mysqli_query($conn, $sql);
   } else if ($type_1 === 'Baked') {
     // ดึงข้อมูลสินค้าประเภท Baked
-    $sql = "SELECT * FROM products WHERE type_1 = '$type_1'";
+    $sql = "SELECT * FROM products WHERE type_1 = '$type_1' && status != 'Quit selling'";
     $result = mysqli_query($conn, $sql);
   } else {
     // แสดงข้อความแจ้งเตือน
@@ -176,11 +177,6 @@ if ($result->num_rows > 0) {
                         <input type="hidden" name="comment" value="">
                         <img src="<?= $row["image"] ?>" class="card-img-top<?= ($row['status'] === 'Quit selling') ? ' grayscale' : '' ?>" alt="Product Image" style="height: 270px;">
                         <div class="card-body">
-                        <?php if ($row['status'] === 'Out of raw materials'): ?>
-                                <p style="color: orange;">Out of raw materials</p>
-                            <?php elseif ($row['status'] === 'Quit selling'): ?>
-                                <p style="color: red;">Products temporarily stopped for sale</p>
-                            <?php else: ?>
                         <h6 style="font-size: 15px;" class="card-title"><?= $row["name"] ?></h6>
                         <p class="card-text">Price: <?= $row["price_h"] ?> Bath</p>
                         <div class="input-group mb-3">
@@ -189,8 +185,11 @@ if ($result->num_rows > 0) {
                             </div>
                             <input type="number" name="quantity" class="form-control" value="1" min="1" max="99">
                         </div>
-                        <button class="btn btn-primary mt-3">Add to Cart</button>
-                        <?php endif; ?>
+                            <?php if ($row['status'] === 'Out of raw materials'): ?>
+                                <button class="btn btn-danger mt-3" type="button" disabled>Out of Stock</button>
+                            <?php else: ?>
+                                <button class="btn btn-primary mt-3" type="submit">Add to Cart</button>
+                            <?php endif; ?>
                     </div>
                     </div>
                     </form>
@@ -226,36 +225,23 @@ if ($result->num_rows > 0) {
                             </div>
                             <label for="Comment">Option</label>
                             <select class="custom-select mb-3" name="comment">
-                                <option value=""></option>
-                                <optgroup label="Sweet">
-                                    <option value="No Sweet">No Sweet</option>
-                                    <option value="add sweet 25%">add sweet 25%</option>
-                                    <option value="add sweet 50%">add sweet 50%</option>
-                                    <option value="add sweet 75%">add sweet 75%</option>
-                                    <option value="add sweet 100%">add sweet 100%</option>
-                                    <option value="Low sweet 25%">Low sweet 25%</option>
-                                <?php if ($row['type_2'] == 'Coffee'): ?>
-                                    <optgroup label="Shot">
-                                        <option value="Single Shot +20 Bath">Single Shot +20 Bath</option>
-                                        <option value="Double Shot +40 Bath">Double Shot +40 Bath</option>
-                                        <option value="Triple Shot +60 Bath">Triple Shot +60 Bath</option>
-                                    </optgroup>
-                                <?php endif; ?>
-                                <?php if ($row['type_2'] == 'Tea'): ?>
-                                    <optgroup label="Topping">
-                                        <option value="Bubble +5 Bath">Bubble +5 Bath</option>
-                                        <option value="Milk Pudding +10 Bath">Milk Pudding +10 Bath</option>
-                                        <option value="Wip Cheese +20 Bath">Wip Cheese +20 Bath</option>
-                                    </optgroup>
-                                <?php endif; ?>
+                                <option value="">Normal sweet 50%</option>
+                                        <optgroup label="Sweet">
+                                            <option value="No Sweet">No Sweet</option>
+                                            <option value="Low sweet 25%">Low sweet 25%</option>
+                                            <option value="add sweet 25%">add sweet 25%</option>
+                                            <option value="add sweet 50%">add sweet 50%</option>
+                                        <?php if ($row['type_2'] == 'Coffee'): ?>
+                                            <optgroup label="Shot">
+                                                <option value="Single Shot +20 Bath">Single Shot +20 Bath</option>
+                                                <option value="Double Shot +40 Bath">Double Shot +40 Bath</option>
+                                                <option value="Triple Shot +60 Bath">Triple Shot +60 Bath</option>
+                                            </optgroup>
+                                        <?php endif; ?>
                             </select>
                             <br>
-                            <?php if ($row['status'] === 'Quit selling' || $row['status'] === 'Out of raw materials'): ?>
-                                <?php if ($row['status'] === 'Quit selling'): ?>
-                                    <button class="btn btn-danger mt-3" type="button" disabled>Add to Cart</button>
-                                <?php elseif ($row['status'] === 'Out of raw materials'): ?>
-                                    <button class="btn btn-warning mt-3" type="button" disabled>Add to Cart</button>
-                                <?php endif; ?>
+                            <?php if ($row['status'] === 'Out of raw materials'): ?>
+                                <button class="btn btn-danger mt-3" type="button" disabled>Out of Stock</button>
                             <?php else: ?>
                                 <button class="btn btn-primary mt-3" type="submit">Add to Cart</button>
                             <?php endif; ?>

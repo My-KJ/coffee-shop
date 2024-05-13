@@ -53,7 +53,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
             <table>
                 <thead>
                     <tr>
-                        <th>Image</th>
+                        <th style="text-align: center;">Image</th>
                         <th style="text-align: center;">Name</th>
                         <th style="text-align: center;">Price</th>
                         <th style="text-align: center;">Quantity</th>                     
@@ -61,44 +61,34 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                   $totalPrice = 0;
-                   $total = 0;
+                <?php
+                    $totalPrice = 0;
 
-                   foreach($_SESSION['cart'] as $item) {
-                       $productId = $item['id'];
-                       $productName = $item['name'];
-                       $productPrice = $item['price'];
-                       $quantity = $item['quantity'];
-                       $comment = $item['comment'];
-                       $productImage = $item['image'];
+                    foreach($_SESSION['cart'] as $item) {
+                        $productId = $item['id'];
+                        $productName = $item['name'];
+                        $productPrice = $item['price'];
+                        $quantity = $item['quantity'];
+                        $comment = $item['comment'];
+                        $productImage = $item['image'];
 
                         // คำนวณราคาทั้งหมดโดยการคูณราคาสินค้าด้วยจำนวนสินค้า
-                        $total = $productPrice* $quantity;
+                        $total = $productPrice * $quantity;
 
-                   
-                       $shotPrice = 20; // ราคาของ shot ที่ต้องการเพิ่ม
+                        // ปรับราคาสินค้าโดยพิจารณาความเสมอภาคของ Shot และ Topping
+                        $shotPrice = 20; // ราคาของ shot ที่ต้องการเพิ่ม
                         $toppingPrice = 0;
                         if ($comment == 'Single Shot +20 Bath') {
-                            $total += $shotPrice;
+                            $total += $shotPrice * $quantity;
                         } elseif ($comment == 'Double Shot +40 Bath') {
-                            $total += ($shotPrice * 2);
+                            $total += ($shotPrice * 2 * $quantity);
                         } elseif ($comment == 'Triple Shot +60 Bath') {
-                            $total += ($shotPrice * 3);
-                        } elseif ($comment == 'Bubble +5 Bath') {
-                            $toppingPrice += 5; // เพิ่มราคา Bubble
-                        } elseif ($comment == 'Milk Pudding +10 Bath') {
-                            $toppingPrice += 10; // เพิ่มราคา Milk Pudding
-                        } elseif ($comment == 'Wip Cheese +20 Bath') {
-                            $toppingPrice += 20; // เพิ่มราคา Whip Cheese
-                        }
-
-                        // เพิ่มราคา Toping เข้าไปในราคาของสินค้า
-                        $total += $toppingPrice;
+                            $total += ($shotPrice * 3 * $quantity);
+                        } 
 
                         // เพิ่มยอดรวมของสินค้าที่คำนวณได้ลงในยอดรวมทั้งหมด
                         $totalPrice += $total;  
-                    ?>
+                ?>
                     <tr>
                         <td style="text-align: center;">
                             <img src="<?= $productImage ?>" alt="Product Image" style="width: 60px; height: auto;">
@@ -113,6 +103,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                         </td>
                     </tr>
                     <?php 
+
                     } 
                     ?>
                 </tbody>

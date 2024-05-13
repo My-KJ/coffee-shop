@@ -31,26 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
             // Calculate additional price for shot and topping based on the comment
             if ($comment == 'Single Shot +20 Bath') {
-                $total += $shotPrice;
+                $total += $shotPrice * $qty;
             } elseif ($comment == 'Double Shot +40 Bath') {
-                $total += ($shotPrice * 2);
+                $total += ($shotPrice * 2 * $qty);
             } elseif ($comment == 'Triple Shot +60 Bath') {
-                $total += ($shotPrice * 3);
-            } elseif ($comment == 'Bubble +5 Bath') {
-                $toppingPrice += 5;
-            } elseif ($comment == 'Milk Pudding +10 Bath') {
-                $toppingPrice += 10;
-            } elseif ($comment == 'Wip Cheese +20 Bath') {
-                $toppingPrice += 20;
-            }
-        
-            // Add topping price to the total
-            $total += $toppingPrice;
-
+                $total += ($shotPrice * 3 * $qty);
+            } 
             
             // Insert data into order_detail table
             $query = "INSERT INTO order_detail (id_bill, id_product, qty, price, comment, status) 
-                      VALUES ('$id_bill', '$id_product', '$qty', '$total', '$comment', '$status')";
+                      VALUES ('$id_bill', '$id_product', '$qty', '$price', '$comment', '$status')";
             $result = mysqli_query($conn, $query);
                 
             if (!$result) {
@@ -59,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
            // ไปยังหน้า customer-wait.php
-           header("Location: bill-create.php?id_bill=".$_SESSION['id_bill']); 
+           echo "<script>window.location.href='bill-create.php?id_bill=" . $_SESSION['id_bill'] . "'</script>";
         exit;
     } elseif (!isset($_SESSION['id_bill'])) {
         // Handle the case where id_bill session variable is not set
