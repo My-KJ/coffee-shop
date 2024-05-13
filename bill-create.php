@@ -108,6 +108,7 @@ $detail_result = mysqli_query($conn, $query);
                         <th style="text-align: center;">Product</th>
                         <th style="text-align: center;">Quantity</th>
                         <th style="text-align: right;">Unit Price</th>
+                        <th style="text-align: right;">Option</th>
                         <th style="text-align: right;">Total Price</th>
                     </tr>
                 </thead>
@@ -140,13 +141,30 @@ $detail_result = mysqli_query($conn, $query);
                         <tr>
                             <td style="text-align: center;"><?php echo $row['product_name']; ?> : <?php echo $row['comment']; ?></td>
                             <td style="text-align: center;"><?php echo $quantity; ?></td>
-                            <td style="text-align: right;"><?php echo number_format($total / $quantity); ?> Bath</td>
+                            <td style="text-align: right;">
+                                <?php 
+                                    echo $row['price'] . " Bath";
+                                ?>
+                            </td>
+                            <td style="text-align: right;">
+                                <?php 
+                                    if ($comment == 'Single Shot +20 Bath') {
+                                        echo number_format($shotPrice) . " Bath";
+                                    } elseif ($comment == 'Double Shot +40 Bath') {
+                                        echo number_format($shotPrice * 2) . " Bath";
+                                    } elseif ($comment == 'Triple Shot +60 Bath') {
+                                        echo number_format($shotPrice * 3) . " Bath";
+                                    } else {
+                                        echo ""; // ถ้าไม่ตรงกับเงื่อนไขทั้งหมด
+                                    }
+                                ?>
+                            </td>
                             <td style="text-align: right;"><?php echo number_format($total); ?> Bath</td>
                         </tr>
                     <?php endwhile; ?>
                     
                     <tr class="total-row">
-                        <td colspan="3">Total</td>
+                        <td colspan="4">Total</td>
                         <td><?php echo number_format($total_price); ?> Bath</td>
                     </tr>
                 </tbody>
