@@ -5,6 +5,12 @@ body {
     padding: 0;
     height: 100%;
 }
+.container mt-5 {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 /* Navbar Styles */
 .navbar {

@@ -161,6 +161,9 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'Manager' || $_SESSIO
                             <!-- modal -->
                             <div class="modal-body">
                                 <p>#: <?php echo $row['id_bill'] ?></p>
+                                    <p>Employees who take care of orders: <?php echo $row['emp_name'] ?></p>
+                                    <p>Product: <?php echo $row['product_name'] ?> : <?php echo $row['comment'] ?></p>
+                                    <p>type: <?php echo $row['type'] ?></p>
                                     <p>Image:
                                     <br>
                                     <?php
@@ -174,9 +177,6 @@ if (!isset($_SESSION['username']) || $_SESSION['type'] !== 'Manager' || $_SESSIO
                                     }
                                     ?>
                                     </p>
-                                    <p>Employees who take care of orders: <?php echo $row['emp_name'] ?></p>
-                                    <p>Product: <?php echo $row['product_name'] ?> : <?php echo $row['comment'] ?></p>
-                                    <p>type: <?php echo $row['type'] ?></p>
                                     <p>Status: <?php echo $row['status'] ?></p>
                                     
                                         <hr>
